@@ -13,7 +13,6 @@ export class UnsuccessfulRequestError extends UnipileError {
 
   constructor(body: unknown) {
     super({ message: '', body });
-    this.body = (body ?? {}) as UnsuccessfulRequestErrorBody;
   }
 }
 
