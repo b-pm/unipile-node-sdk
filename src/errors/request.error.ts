@@ -1,9 +1,19 @@
 import { ValueErrorIterator } from '@sinclair/typebox/errors';
 import { UnipileError } from './unipile.error.js';
 
+/** Shape documented in README "Handling Errors" for failed HTTP responses. */
+export type UnsuccessfulRequestErrorBody = {
+  status?: number;
+  type?: string;
+  [key: string]: unknown;
+};
+
 export class UnsuccessfulRequestError extends UnipileError {
+  declare body: UnsuccessfulRequestErrorBody;
+
   constructor(body: unknown) {
     super({ message: '', body });
+    this.body = (body ?? {}) as UnsuccessfulRequestErrorBody;
   }
 }
 
