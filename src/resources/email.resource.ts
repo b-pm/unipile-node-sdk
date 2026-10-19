@@ -316,7 +316,9 @@ export class EmailResource {
     if (options?.extra_params) {
       Object.entries(options.extra_params).forEach(([k, v]) => {
         if (!formDataBody.has(k)) {
-          formDataBody.append(k, v);
+          for (const item of Array.isArray(v) ? v : [v]) {
+            formDataBody.append(k, item);
+          }
         }
       });
     }
