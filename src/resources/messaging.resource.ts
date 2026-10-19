@@ -99,7 +99,8 @@ export class MessagingResource {
     if (options?.extra_params) {
       Object.entries(options.extra_params).forEach(([k, v]) => {
         if (!body.has(k)) {
-          body.append(k, v);
+          const values = Array.isArray(v) ? v : [v];
+          values.forEach((item) => body.append(k, item));
         }
       });
     }
@@ -161,7 +162,8 @@ export class MessagingResource {
     if (options?.extra_params) {
       Object.entries(options.extra_params).forEach(([k, v]) => {
         if (!body.has(k)) {
-          body.append(k, v);
+          const values = Array.isArray(v) ? v : [v];
+          values.forEach((item) => body.append(k, item));
         }
       });
     }
