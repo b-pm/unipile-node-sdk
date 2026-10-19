@@ -36,7 +36,7 @@ export class MessagingResource {
   async getAllChats(input: GetAllChatsInput = {}, options?: RequestOptions): Promise<ChatListApiResponse> {
     const { before, after, limit, account_type, account_id, cursor, unread } = input;
 
-    const parameters: Record<string, string> = { ...options?.extra_params };
+    const parameters: Record<string, string | string[]> = { ...options?.extra_params };
     if (before) parameters.before = before;
     if (after) parameters.after = after;
     if (limit) parameters.limit = String(limit);
@@ -67,7 +67,7 @@ export class MessagingResource {
   async getAllMessagesFromChat(input: GetAllMessagesFromChatInput, options?: RequestOptions): Promise<MessageListApiResponse> {
     const { chat_id, sender_id, before, after, limit, cursor } = input;
 
-    const parameters: Record<string, string> = { ...options?.extra_params };
+    const parameters: Record<string, string | string[]> = { ...options?.extra_params };
     if (sender_id) parameters.sender_id = sender_id;
     if (before) parameters.before = before;
     if (after) parameters.after = after;
@@ -222,7 +222,7 @@ export class MessagingResource {
   ): Promise<MessageListApiResponse> {
     const { attendee_id, cursor, before, after, limit } = input;
 
-    const parameters: Record<string, string> = { ...options?.extra_params };
+    const parameters: Record<string, string | string[]> = { ...options?.extra_params };
     if (cursor) parameters.cursor = cursor;
     if (before) parameters.before = before;
     if (after) parameters.after = after;
@@ -240,7 +240,7 @@ export class MessagingResource {
   async getAllChatsFromAttendee(input: GetAllChatsFromAttendeeInput, options?: RequestOptions): Promise<ChatListApiResponse> {
     const { attendee_id, cursor, before, after, limit, account_id } = input;
 
-    const parameters: Record<string, string> = { ...options?.extra_params };
+    const parameters: Record<string, string | string[]> = { ...options?.extra_params };
     if (cursor) parameters.cursor = cursor;
     if (before) parameters.before = before;
     if (after) parameters.after = after;
@@ -271,7 +271,7 @@ export class MessagingResource {
   async getAllAttendees(input: GetAllAttendeesInput = {}, options?: RequestOptions): Promise<ChatAttendeeListApiResponse> {
     const { cursor, limit, account_id } = input;
 
-    const parameters: Record<string, string> = { ...options?.extra_params };
+    const parameters: Record<string, string | string[]> = { ...options?.extra_params };
     if (cursor) parameters.cursor = cursor;
     if (limit) parameters.limit = String(limit);
     if (account_id) parameters.account_id = account_id;
