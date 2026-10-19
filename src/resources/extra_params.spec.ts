@@ -50,6 +50,12 @@ describe('extra_params', () => {
         expect((r as any).url).toBe(API_URL + 'accounts?limit=30&legit=test');
       },
     );
+    it('should serialize array extra_params as repeated query keys on GET', async () => {
+      const r = await client.account.getOne('some_account_id', {
+        extra_params: { tag: ['alpha', 'beta'] },
+      });
+      expect((r as any).url).toBe(API_URL + 'accounts/some_account_id?tag=alpha&tag=beta');
+    });
   });
   //----------------------------------------------------------------------------
   describe('POST | PUT', () => {
