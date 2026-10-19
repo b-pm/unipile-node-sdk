@@ -164,7 +164,9 @@ export class UsersResource {
     if (options?.extra_params) {
       Object.entries(options.extra_params).forEach(([k, v]) => {
         if (!body.has(k)) {
-          body.append(k, v);
+          for (const item of Array.isArray(v) ? v : [v]) {
+            body.append(k, item);
+          }
         }
       });
     }
